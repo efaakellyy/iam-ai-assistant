@@ -67,6 +67,13 @@ The system is structured with clear separation of concerns:
 * Safeguards against incorrect or cross-cloud outputs
 
 ---
+## Design Decisions
+
+- Chose Zod for runtime validation of LLM outputs  
+- Implemented multi-layer validation to mitigate LLM unpredictability  
+- Used CLI interface for simplicity and fast iteration  
+
+---
 
 ## Example
 
@@ -112,6 +119,7 @@ Example:
 Give read access to a storage account
 ```
 
+Type exit to quit the CLI
 ---
 
 ## Command Line Options

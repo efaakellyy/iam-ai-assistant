@@ -28,11 +28,11 @@ export async function generateIAMPolicy(userInput, context) {
       {
         role: "user",
         content: `
-    Generate an Azure IAM policy for this environment:
+Generate an Azure IAM policy for this environment:
 
-    Subscription ID: ${context.subscriptionId}
-    Resource Group: ${context.resourceGroup}
-    Storage Account: ${context.storageAccount}
+Subscription ID: ${context.subscriptionId}
+Resource Group: ${context.resourceGroup}
+Storage Account: ${context.storageAccount}
 
 Request: ${userInput}
         `,
@@ -44,6 +44,14 @@ Request: ${userInput}
   const raw = response.choices[0].message.content;
 
   const validated = validateIAMPolicy(raw);
+
+  if (validated.scope.includes("*")) {
+    throw new Error("Overly broad scope detected");
+  }
+
+  if (!validated.scope.includes("/subscriptions/")) {
+    throw new Error("Invalid scope format");
+  }
 
   return validated;
 }
