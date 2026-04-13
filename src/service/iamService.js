@@ -1,5 +1,5 @@
-import { client } from "./client.js";
-import { validateIAMPolicy } from "./validator.js";
+import { client } from "../llm/openaiClient.js";
+import { validateIAMPolicy } from "../validation/policySchema.js";
 
 const SYSTEM_PROMPT = `
 You are an Azure IAM policy generator.
