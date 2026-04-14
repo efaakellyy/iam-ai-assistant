@@ -65,13 +65,7 @@ The system is structured with clear separation of concerns:
 * Interactive CLI with continuous input loop
 * Command-line flags for dynamic context configuration
 * Safeguards against incorrect or cross-cloud outputs
-
----
-## Design Decisions
-
-- Chose Zod for runtime validation of LLM outputs  
-- Implemented multi-layer validation to mitigate LLM unpredictability  
-- Used CLI interface for simplicity and fast iteration  
+* Unit-tested validation and service layers with mocked LLM responses 
 
 ---
 
@@ -110,6 +104,7 @@ npm install
 # Run the application
 npm start
 ```
+```
 
 You will be prompted to enter a natural language access request.
 
@@ -117,9 +112,12 @@ Example:
 
 ```text
 Give read access to a storage account
-```
 
-Type exit to quit the CLI
+```
+```bash
+# Exit the application
+exit
+```
 ---
 
 ## Command Line Options
@@ -168,6 +166,32 @@ The system uses multiple layers to ensure safe and reliable outputs:
 * Preventing **invalid or unsafe IAM policies**
 * Handling **ambiguous or low-quality user input**
 * Designing a system that balances **flexibility with safety constraints**
+
+---
+
+## Testing
+
+Unit tests are implemented using Jest to ensure correctness of validation and service logic.
+
+```bash
+# Run tests
+npm test
+```
+
+Test coverage includes:
+Validation of IAM policy structure using Zod
+Handling of invalid or malformed inputs
+Service-layer logic with mocked LLM responses
+Security checks (e.g. preventing overly broad scopes)
+
+---
+
+## Design Decisions
+
+- Chose Zod for runtime validation of LLM outputs  
+- Implemented multi-layer validation to mitigate LLM unpredictability  
+- Structured prompts to constrain output to Azure-specific IAM policies
+- Used CLI interface for simplicity and fast iteration
 
 ---
 

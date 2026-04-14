@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/cli/cli.js"
+    "start": "node src/cli/cli.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "keywords": [],
   "author": "",
@@ -15,5 +16,8 @@
     "express": "^5.2.1",
     "openai": "^6.33.0",
     "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "jest": "^30.3.0"
   }
 }
